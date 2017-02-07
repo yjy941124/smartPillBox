@@ -12,7 +12,8 @@
   "dependencies": {
     "body-parser": "*",
     "ejs": "^2.5.5",
-    "express": "*"
+    "express": "*" ,
+    "express-ejs-layouts" : "*"
     
   }
 }

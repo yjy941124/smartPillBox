@@ -17,3 +17,6 @@ exports.submitPost = function (req, res) {
 exports.record = function (req, res) {
     res.render('record');
 }
+exports.pillbox = function (req, res) {
+    res.render('pillbox');
+}
