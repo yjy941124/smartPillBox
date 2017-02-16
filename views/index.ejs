@@ -24,13 +24,23 @@
 
       <div class="starter-template">
         <h1>Welcome to ICSL's smart Pillbox. Please select the template.</h1>
-          <a class="btn btn-primary btn-lg" id="pillbox" onclick="select('pillbox')" role="button">Pillbox</a>
-          <a class="btn btn-primary btn-lg" onclick="select('bloodtest')" role="button">Blood test</a>
-          <a class="btn btn-primary btn-lg" onclick="select('appc')" role="button">App C</a>
+
           <br>
 
+          <div class="row">
+              <div class="col-lg-6">
+                  <a class="btn btn-primary btn-lg" onclick="upload()" role="button">Upload a File</a>
+              </div>
+              <div class="col-lg-6">
+                  <a class="btn btn-primary btn-lg" id="pillbox" onclick="select('pillbox')" role="button">Pillbox</a>
+                  <a class="btn btn-primary btn-lg" onclick="select('bloodtest')" role="button">Blood test</a>
+                  <a class="btn btn-primary btn-lg" onclick="select('appc')" role="button">App C</a>
+              </div>
+          </div>
         <div id="returnedNumber"></div>
       </div>
+
+
 
 
         <div id="QRModal" class="modal fade" role="dialog">
@@ -48,11 +58,33 @@
                     <p>When the upload is finished, please click Next.</p>
                     <div class="modal-footer">
                     <div class="col-sm-6">
-                        <button class="btn btn-primary btn-lg modal-footer-btn" onclick="redirect()" role="button">Next</button>
+                        <button class="btn btn-primary btn-lg modal-footer-btn" onclick="uploadTest()" role="button">uploadTest</button>
+                        <button class="btn btn-primary btn-lg modal-footer-btn" onclick="accept()" role="button">Next</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="appModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Based on your uploaded file, here's our recommendation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <label>We recognize your file as  </label><label id="recognized-app"></label><label>, do you want to direct to  </label>
+                        <label id="recognized-app"></label>
                     </div>
 
+                    <br>
 
-
+                    <div class="modal-footer">
+                        <div class="col-xs-3">
+                            <button class="btn btn-success btn-lg modal-footer-btn" onclick="redirect()" role="button">Redict</button>
+                            <button class="btn btn-danger btn-lg modal-footer-btn" data-dismiss="modal" role="button">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,6 +93,7 @@
 
 
     <script type="text/javascript" src="../public/js/index.js"></script>
+
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 
   </body>

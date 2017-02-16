@@ -14,6 +14,7 @@ app.set('view engine', 'ejs');    // Set the template engine
 app.get('/', router.home);
 app.get('/schedule', router.schedule);
 app.post('/schedule', router.submitPost);
+app.post('/uploadFile', router.fileUpload);
 app.get('/record', router.record);
 app.get('/pillbox', router.pillbox);
 var port = process.env.PORT || 3000;
@@ -22,3 +23,4 @@ app.listen(port, function () {
 });
 
 //URL is :node-express-env.prpmrstyrj.us-west-2.elasticbeanstalk.com
+//URL is :node-express-env.prpmrstyrj.us-west-2.elasticbeanstalk.com/
