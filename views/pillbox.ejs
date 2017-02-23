@@ -1,5 +1,56 @@
-<body>
+<style>
+    .button1 {
+        background-color: deepskyblue; /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        border-radius: 12px;
+    }
+    .button1:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    .button2 {
+        background-color: forestgreen; /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+        border-radius: 12px;
+    }
+    .button2:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
 
+    .popover-content{
+        overflow:auto;
+        max-height:200px;
+    }
+    .red{color:red;}
+    .green{color:green;}
+
+    /*
+     * Bootstrap year calendar v1.1.0
+     * Created by Paul David-Sivelle
+     * Licensed under the Apache License, Version 2.0
+     */
+    .calendar{padding:4px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;overflow:auto;direction:ltr;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.calendar.calendar-rtl{direction:rtl}.calendar.calendar-rtl table tr td span{float:right}.calendar table{margin:auto}.calendar table td,.calendar table th{text-align:center;width:20px;height:20px;border:none;padding:4px 5px;font-size:12px}.calendar .calendar-header{width:100%;margin-bottom:20px}.calendar .calendar-header table{width:100%}.calendar .calendar-header table th{font-size:22px;padding:5px 10px}.calendar .calendar-header table th:hover{background:#eee;cursor:pointer}.calendar .calendar-header table th.disabled,.calendar .calendar-header table th.disabled:hover{background:0 0;cursor:default;color:#fff}.calendar .calendar-header table th.next,.calendar .calendar-header table th.prev{width:20px}.calendar .year-title{font-weight:700;text-align:center;height:20px;width:auto}.calendar .year-neighbor{color:#aaa}.calendar .year-neighbor2,.calendar table.month tr td.disabled,.calendar table.month tr td.disabled:hover{color:#ddd}.calendar .months-container{width:100%;display:none}.calendar .month-container{min-width:180px;text-align:center;height:200px;padding:0}.calendar table.month th.month-title{font-size:16px;padding-bottom:5px}.calendar table.month th.day-header{font-size:14px}.calendar table.month tr td,.calendar table.month tr th{padding:0}.calendar table.month td.week-number{cursor:default;font-weight:700;border-right:1px solid #eee;padding:5px}.calendar .round-left{-webkit-border-radius:8px 0 0 8px;-moz-border-radius:8px 0 0 8px;border-radius:8px 0 0 8px}.calendar .round-right{webkit-border-radius:0 8px 8px 0;-moz-border-radius:0 8px 8px 0;border-radius:0 8px 8px 0}.calendar table.month tr td .day-content{-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;padding:5px 6px}.table-striped .calendar table.month tr td,.table-striped .calendar table.month tr th{background-color:transparent}.calendar table.month td.day .day-content:hover{background:rgba(0,0,0,.2);cursor:pointer}.calendar table.month td.day.disabled .day-content:hover,.calendar table.month tr td.new,.calendar table.month tr td.new:hover,.calendar table.month tr td.old,.calendar table.month tr td.old:hover{background:0 0;cursor:default}.calendar table.month tr td.range .day-content{background:rgba(0,0,0,.2);-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}.calendar table.month tr td.range.range-start .day-content{border-top-left-radius:4px;border-bottom-left-radius:4px}.calendar table.month tr td.range.range-end .day-content{border-top-right-radius:4px;border-bottom-right-radius:4px}.calendar-context-menu,.calendar-context-menu .submenu{border:1px solid #ddd;background-color:#fff;box-shadow:2px 2px 5px rgba(0,0,0,.2);-webkit-box-shadow:2px 2px 5px rgba(0,0,0,.2);position:absolute;display:none}.calendar-context-menu .item{padding:5px 10px;cursor:pointer;display:table;width:100%}.calendar-context-menu .item:hover{background:#eee}.calendar-context-menu .item .content{display:table-cell}.calendar-context-menu .item span{display:table-cell;padding-left:10px;text-align:right}.calendar-context-menu .item span:last-child{display:none}.calendar-context-menu .submenu{left:100%;margin-top:-6px}.calendar-context-menu .item:hover>.submenu{display:block}
+</style>
+<!--This is the navigation/user bar-->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -9,37 +60,98 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Pillbox</a>
+            <a class="navbar-brand" href="/">Platform</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ><a href="/pillbox">Home</a></li>
-                <li ><a href="/pillbox">Record</a></li>
-                <li ><a href="/pillbox/schedule">Schedule</a></li>
-
+                <li ><a href="/">Home</a></li>
 
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+<div style="margin-top: 80px;">
+</div>
 
 <div class="container">
 
-    <div class="starter-template">
-        <h1>This is the uploaded record page. --TODO</h1>
+    <h3 style="text-align:center;"> You can view patient's historical records below. Click <a onclick="historyTip()">here</a> for how to use it.</h3>
+    <!--<input type="text" id="loginUsername" name="username" class="form-control" placeholder="Username" required autofocus>
+    <input type="password" id="loginPassword" name="password" class="form-control" placeholder="Password" required>-->
 
-        <br>
+    <div style="text-align:center;" id="buttons">
 
-        <div id="returnedNumber"></div>
+        <button class="button1" onclick="pair()">Upload History</button>
+        <button class="button2" onclick="getUploadFile()">Show History</button>
+
     </div>
 
 
+</div> <!-- /container -->
+<div style="margin-top: 30px;">
+</div>
+<div id="historyDiv">
+    <table id="historyTable" class="table table-striped" style="width:100%">
 
-</div><!-- /.container -->
+    </table>
+</div>
+<div id="historyTipModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Instructions on how to check historical records.</h4>
+            </div>
+            <div class="modal-body">
+                <h4>In order to view historical records. The patient first needs to upload from its phone.</h4>
+                <h4>Once the patient initiates the upload, the smartphone application will ask for a QR code to scan.
+                    On the web application, click on <b>History Portal</b> to display the QR code. This process allows secure
+                    transmission of patient's records.</h4>
+                <h4>After the record is uploaded, click on <b>Show History</b> to view historical records.</h4>
+
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div id="pairModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Please scan the QR code to upload historical records to the doctor.</h4>
+            </div>
+            <div class="modal-body">
+                <div id="pairQrcode"></div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div id="noDataModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">No Data.</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title">No uploaded data.</h4>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
 
 
-<script type="text/javascript" src="../public/js/index.js"></script>
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-
-</body>
+<script type="text/javascript" src="../public/js/pillbox.js"></script>
+<!--
+<script type="text/javascript" src="/js/jsencrypt.min.js"></script>
+-->
+<!--
+This is the history html page-->

@@ -1,6 +1,7 @@
 /**
  * Created by jinyangyu on 2/2/17.
  */
+var file;
 exports.home = function(req, res) {
     res.render('index');
 };
@@ -19,9 +20,4 @@ exports.record = function (req, res) {
 };
 exports.pillbox = function (req, res) {
     res.render('pillbox');
-};
-exports.fileUpload = function (req, res) {
-    var file = req.body.value;
-    console.log(file);
-    res.send(req.body);
 };

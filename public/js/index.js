@@ -57,8 +57,11 @@ function upload() {
 $('#QRModal').on('hidden.bs.modal', function () {
     $('#Qrcode').html('');
 });
-function redirect() {
-    window.location.href = '/'+appname;
+function redirect(selectedApp) {
+    window.location.href = '/'+selectedApp;
+}
+function redirectAutoRecognition() {
+    window.location.href = '/'+ appname;
 }
 function accept() {
     console.log(uploadedFile == '001');

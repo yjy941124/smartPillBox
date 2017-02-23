@@ -32,9 +32,9 @@
                   <a class="btn btn-primary btn-lg" onclick="upload()" role="button">Upload a File</a>
               </div>
               <div class="col-lg-6">
-                  <a class="btn btn-primary btn-lg" id="pillbox" onclick="select('pillbox')" role="button">Pillbox</a>
-                  <a class="btn btn-primary btn-lg" onclick="select('bloodtest')" role="button">Blood test</a>
-                  <a class="btn btn-primary btn-lg" onclick="select('appc')" role="button">App C</a>
+                  <a class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a>
+                  <a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a>
+                  <a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a>
               </div>
           </div>
         <div id="returnedNumber"></div>
@@ -82,7 +82,7 @@
 
                     <div class="modal-footer">
                         <div class="col-xs-3">
-                            <button class="btn btn-success btn-lg modal-footer-btn" onclick="redirect()" role="button">Redict</button>
+                            <button class="btn btn-success btn-lg modal-footer-btn" onclick="redirectAutoRecognition()" role="button">Redirect</button>
                             <button class="btn btn-danger btn-lg modal-footer-btn" data-dismiss="modal" role="button">Close</button>
                         </div>
                     </div>
