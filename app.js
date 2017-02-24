@@ -13,7 +13,7 @@ app.use('/public',express.static('./public'));
 app.set('views', './views');  // Specify the folder to find templates
 app.set('view engine', 'ejs');    // Set the template engine
 app.get('/', router.home);
-app.get('/schedule', router.schedule);
+app.get('/pillbox/schedule', router.schedule);
 app.post('/schedule', router.submitPost);
 app.post('/uploadFile', function (req, res) {
     file = req.body.value;
@@ -26,6 +26,7 @@ app.get('/uploadFile', function (req, res) {
 });
 app.get('/record', router.record);
 app.get('/pillbox', router.pillbox);
+
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
     console.log(port);
