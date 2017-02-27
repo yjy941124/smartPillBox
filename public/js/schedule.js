@@ -1,24 +1,4 @@
-//var number;
-/*function submit() {
-    number = {"value" : document.getElementById('number').value};
 
-    /!*$.post('/schedule',{value:number}, function(data, status){
-        console.log(data);
-    },'json');*!/
-    $.ajax({
-        type: 'POST',
-        url: '/schedule',
-        data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
-        success: function(data) {
-
-
-        },
-        contentType: "application/json",
-        dataType: 'json'
-    });
-
-
-}*/
 var timestamps;
 $(function () {
     $('.timeInput1').timepicker({ 'timeFormat': 'H:i A' });
@@ -34,6 +14,9 @@ function calculateTimeStamp() {
     var timeStampsOutput = "";
     var dateOutput = "";
     var curDate = day1MomentDate.format("MM-DD-YYYY");
+    var midnight = moment(curDate, "MM-DD-YYYY hh:mm ap").unix().toString();
+    timeStampsOutput += midnight;
+
     for (var i= 0; i<= 6;i++){
         var timeSlot1 = $('#basicExample' + (1+i*4).toString()).val();
         var timeSlot2 = $('#basicExample' + (2+i*4).toString()).val();
@@ -43,28 +26,21 @@ function calculateTimeStamp() {
         var timeSlot2Moment = moment(curDate + " " + timeSlot2, "MM-DD-YYYY hh:mm ap").unix();
         var timeSlot3Moment = moment(curDate + " " + timeSlot3, "MM-DD-YYYY hh:mm ap").unix();
         var timeSlot4Moment = moment(curDate + " " + timeSlot4, "MM-DD-YYYY hh:mm ap").unix();
-        timeStampsOutput += timeSlot1Moment + ";" + timeSlot2Moment + ";" + timeSlot3Moment + ";" + timeSlot4Moment + ";";
+        timeStampsOutput += timeSlot1Moment.toString()  + timeSlot2Moment.toString()  + timeSlot3Moment.toString()  + timeSlot4Moment.toString() ;
         dateOutput += timeSlot1Moment.toString() + "\n" + timeSlot2Moment.toString() + "\n" + timeSlot3Moment.toString() + "\n" + timeSlot4Moment.toString() + "\n";
         curDate = day1MomentDate.add(1, 'days').format("MM-DD-YYYY");
     }
+    UTCtimeStamp = Math.round((new Date()).valueOf()/1000).toString();
 
-    timestamps = {date:timeStampsOutput};
+    timeStampsOutput+=UTCtimeStamp.toString();
+    timestamps = timeStampsOutput;
     console.log(timeStampsOutput);
+    console.log(timeStampsOutput.length);
 }
 function submit() {
-    calculateTimeStamp();
-    /*$.post('/schedule',{value:number}, function(data, status){
-     console.log(data);
-     },'json');*/
-    /*$.ajax({
-        type: 'POST',
-        url: '/pillbox/schedule',
-        data: JSON.stringify(timestamps), // or JSON.stringify ({name: 'jonas'}),
-        success: function(data) {
-        },
-        contentType: "application/json",
-        dataType: 'json'
-    });*/
+    var scheduleQRCode = new QRCode("Qrcode-schedule");
+    scheduleQRCode.makeCode(timestamps);
+    $("#QRModal-schedule").modal('show');
 
 
 }
@@ -78,4 +54,8 @@ function autoFill() {
     $('.timeInput2').timepicker('setTime', timeSlot2);
     $('.timeInput3').timepicker('setTime', timeSlot3);
     $('.timeInput4').timepicker('setTime', timeSlot4);
+    calculateTimeStamp();
 }
+$('#QRModal-schedule').on('hidden.bs.modal', function () {
+    $('#Qrcode-schedule').html('');
+});

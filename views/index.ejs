@@ -23,11 +23,17 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Welcome to ICSL's smart Pillbox. Please select the template.</h1>
-
+        <h1>Welcome to ICSL's SafeUpLoad</h1>
+        <h1>Please
+                <a class="btn btn-primary btn-lg" onclick="upload()" role="button">Upload a File</a>
+             or open an app
+                <a class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a>
+                <a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a>
+                <a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a>
+            </h1>
           <br>
 
-          <div class="row">
+          <!--<div class="row">
               <div class="col-lg-6">
                   <a class="btn btn-primary btn-lg" onclick="upload()" role="button">Upload a File</a>
               </div>
@@ -36,7 +42,7 @@
                   <a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a>
                   <a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a>
               </div>
-          </div>
+          </div>-->
         <div id="returnedNumber"></div>
       </div>
 
@@ -58,7 +64,7 @@
                     <p>When the upload is finished, please click Next.</p>
                     <div class="modal-footer">
                     <div class="col-sm-6">
-                        <button class="btn btn-primary btn-lg modal-footer-btn" onclick="uploadTest()" role="button">uploadTest</button>
+                        <!--<button class="btn btn-primary btn-lg modal-footer-btn" onclick="uploadTest()" role="button">uploadTest</button>-->
                         <button class="btn btn-primary btn-lg modal-footer-btn" onclick="accept()" role="button">Next</button>
                     </div>
                     </div>
@@ -85,6 +91,34 @@
                             <button class="btn btn-success btn-lg modal-footer-btn" onclick="redirectAutoRecognition()" role="button">Redirect</button>
                             <button class="btn btn-danger btn-lg modal-footer-btn" data-dismiss="modal" role="button">Close</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="appListModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Now select the desired app to open</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select your app
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="/pillbox">Pillbox</a></li>
+                                <li><a href="/bloodtest">Blood Test</a></li>
+                                <li><a href="/somethingelse">App C</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="modal-footer">
+
                     </div>
                 </div>
             </div>

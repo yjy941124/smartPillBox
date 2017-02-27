@@ -2,15 +2,13 @@
  * Created by jinyangyu on 2/23/17.
  */
 
-var historyStr = '';
+var historyStr;
 var username = $("#nameHolder").val();
 //var History = Parse.Object.extend("History");
-var historyRecord = '';
-var historyExclusive = '';
 var pairQrcode = new QRCode("pairQrcode");
 var publicKey;
 var privateKey;
-
+var exclude;
 //var testEn = '';
 
 window.onload = getUploadFile();
@@ -22,53 +20,48 @@ function getUploadFile() {
         success: function(data) {
             console.log('hereGet');
             console.log(data);
-            historyStr = data;
-            console.log(exclusiveKey);
+            historyStr = data.message;
+            exclude = data.exclusive;
+            $.ajax({
+                type: 'GET',
+                url: '/uploadPrivateKey',
+                //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
+                success: function(data) {
+
+                    privateKey = data;
+                    console.log(privateKey);
+                    viewHistory();
+
+                }, error: function (data) {
+                    console.log(data);
+                },
+                contentType: "application/json",
+                dataType: 'text'
+            });
 
         }, error: function (data) {
             console.log(data);
         },
         contentType: "application/json",
-        dataType: 'text'
+        dataType: 'json'
     });
+
+
 }
 
 function viewHistory() {
-
-    if (exclusiveKey == '') {
-        // please add no data alert
-        noDataAlert();
-        return;
-    }
 
     var queryhistory = historyStr;
     var parsedResults = [];
     var crypt = new JSEncrypt({ default_key_size: 1024 });
     crypt.setPrivateKey(privateKey);
-
-
-
-    queryhistory.equalTo("exclusive", exclusiveKey);
-    queryhistory.first(function (result) {
-        console.log("DB_Result", result);
-        if (result != null) {
-            var parsed = parseHistoryString(result);
-            parsedResults = parsedResults.concat(parsed);
-        }
-    }).then(function () {
-        console.log("Result", parsedResults.length);
-        if (parsedResults.length > 0) {
-            parsedResults = parsedResults.sort(function (a, b) {
-                return (+a.timestamp) - (+b.timestamp);
-            });
-
-            renderCalendar(combineMsg(parsedResults));
-        }
-        else {
-            //please no data alert !
-            noDataAlert();
-        }
+    var parsed = parseHistoryString(historyStr);
+    parsedResults = parsedResults.concat(parsed);
+    parsedResults = parsedResults.sort(function (a, b) {
+        return (+a.timestamp) - (+b.timestamp);
     });
+    renderCalendar(combineMsg(parsedResults));
+
 }
 
 function combineMsg(itemList) {
@@ -454,7 +447,7 @@ function renderCalendar(parsedResults){
 //viewHistory();//debug only
 
 function tm(dt) {
-    return (dt.getMonth()+1) + '/' + dt.getDate() + '/' + dt.getYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds();
+    return (dt.getMonth()+1) + '/' + dt.getDate() + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds();
 }
 
 

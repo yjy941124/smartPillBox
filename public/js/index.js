@@ -11,33 +11,32 @@ function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for (var i = 0; i < 7; i++)
+    for (var i = 0; i < 7; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-
+    }
     return text;
 }
-function select(selectedObject) {
 
+/**
+ *
+ * @param selectedObject
+ */
+function select(selectedObject) {
     selected = selectedObject;
     console.log(selected);
-    var pairQrcode = new QRCode("Qrcode");
-    var pairURL = 'abc';
     var crypt = new JSEncrypt({ default_key_size: 1024 });
     crypt.getKey();
     privateKey = crypt.getPrivateKeyB64();
     publicKey = crypt.getPublicKeyB64();
-    var rands = makeid();
-    var timestamp3 = new Date().getTime();
-    exclusiveKey = rands + timestamp3.toString();
+    exclusiveKey = makeid() + (new Date()).getTime().toString();
+    var pairQrcode = new QRCode("Qrcode");
     pairQrcode.makeCode(publicKey+exclusiveKey);
 /*    console.log(publicKey);
     console.log(rands);
     console.log(timestamp3.toString());*/
     $("#QRModal").modal('show');
-
-
-
 }
+
 function upload() {
     var pairQrcode = new QRCode("Qrcode");
     var pairURL = 'abc';
@@ -51,7 +50,21 @@ function upload() {
     pairQrcode.makeCode(publicKey+exclusiveKey);
     console.log(publicKey);
     console.log(exclusiveKey);
+    $.ajax({
+        type: 'POST',
+        url: '/uploadPrivateKey',
+        data: JSON.stringify({"value" : privateKey}), // or JSON.stringify ({name: 'jonas'}),
+        success: function(data) {
 
+            console.log('here');
+            console.log(data);
+
+        }, error: function (data) {
+            console.log(data);
+        },
+        contentType: "application/json",
+        dataType: 'json'
+    });
     $("#QRModal").modal('show');
 }
 $('#QRModal').on('hidden.bs.modal', function () {
@@ -66,12 +79,12 @@ function redirectAutoRecognition() {
 function accept() {
     console.log(uploadedFile == '001');
     $('#QRModal').modal('toggle');
-    $("#appModal").modal('show');
+    $("#appListModal").modal('show');
 
     if (uploadedFile == '001') appname = 'pillbox';
     document.getElementById('recognized-app').innerHTML = appname;
-
 }
+
 //test function not truly implemented.
 function uploadTest() {
     number = {"value" : '001'};
