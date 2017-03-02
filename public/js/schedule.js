@@ -15,7 +15,7 @@ function calculateTimeStamp() {
     var dateOutput = "";
     var curDate = day1MomentDate.format("MM-DD-YYYY");
     var midnight = moment(curDate, "MM-DD-YYYY hh:mm ap").unix().toString();
-    timeStampsOutput += midnight;
+
 
     for (var i= 0; i<= 6;i++){
         var timeSlot1 = $('#basicExample' + (1+i*4).toString()).val();
@@ -31,7 +31,7 @@ function calculateTimeStamp() {
         curDate = day1MomentDate.add(1, 'days').format("MM-DD-YYYY");
     }
     UTCtimeStamp = Math.round((new Date()).valueOf()/1000).toString();
-
+    timeStampsOutput += midnight;
     timeStampsOutput+=UTCtimeStamp.toString();
     timestamps = timeStampsOutput;
     console.log(timeStampsOutput);
