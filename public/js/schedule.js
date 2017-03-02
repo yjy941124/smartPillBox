@@ -26,13 +26,15 @@ function calculateTimeStamp() {
         var timeSlot2Moment = moment(curDate + " " + timeSlot2, "MM-DD-YYYY hh:mm ap").unix();
         var timeSlot3Moment = moment(curDate + " " + timeSlot3, "MM-DD-YYYY hh:mm ap").unix();
         var timeSlot4Moment = moment(curDate + " " + timeSlot4, "MM-DD-YYYY hh:mm ap").unix();
-        timeStampsOutput += timeSlot1Moment.toString()  + timeSlot2Moment.toString()  + timeSlot3Moment.toString()  + timeSlot4Moment.toString() ;
+        timeStampsOutput += timeSlot1Moment.toString()  +','+ timeSlot2Moment.toString()  +','+ timeSlot3Moment.toString()  +','+ timeSlot4Moment.toString()+',';
         dateOutput += timeSlot1Moment.toString() + "\n" + timeSlot2Moment.toString() + "\n" + timeSlot3Moment.toString() + "\n" + timeSlot4Moment.toString() + "\n";
         curDate = day1MomentDate.add(1, 'days').format("MM-DD-YYYY");
     }
     UTCtimeStamp = Math.round((new Date()).valueOf()/1000).toString();
     timeStampsOutput += midnight;
+    timeStampsOutput += ',';
     timeStampsOutput+=UTCtimeStamp.toString();
+    timeStampsOutput += ',';
     timestamps = timeStampsOutput;
     console.log(timeStampsOutput);
     console.log(timeStampsOutput.length);
