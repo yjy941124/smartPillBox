@@ -19,6 +19,7 @@ app.get('/pillbox/schedule', router.schedule);
 app.post('/schedule', router.submitPost);
 app.post('/uploadFile', function (req, res) {
     file = req.body;
+
     console.log(file);
     res.send(file);
 });
