@@ -1,9 +1,7 @@
 /**
  * Created by jinyangyu on 3/23/17.
  */
-var bcrypt = require('bcryptjs'),
-    Q = require('q'),
-    config = require('./config.js'); //config file contains all tokens and other private info
+var config = require('./config.js'); //config file contains all tokens and other private info
 
 
 // setup MongoDB connection information
