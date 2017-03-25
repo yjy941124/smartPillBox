@@ -26,7 +26,7 @@ exports.saveUploadFile = function (file) {
 exports.getUploadedFile = function (exclusiveKey) {
     return MongoClient.connect(mongodbUrl, function (err, db) {
         var files = db.collection('Files');
-        files.findOne({'exclusive' : exclusiveKey})
+        return files.findOne({'exclusive' : exclusiveKey})
             .then(function (file) {
                 return file.message;
             })

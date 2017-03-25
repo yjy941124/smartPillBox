@@ -47,10 +47,14 @@ app.listen(port, function () {
 });
 app.get('/getUploadedFile/:exclusiveKey', function (req, res) {
     var exclusiveKey = req.params.exclusiveKey;
-    var message = JSON.stringify(util.getUploadedFile());
-    var fakenumber = '1';
-    console.log('query success');
-    res.send(message);
+    var message = JSON.stringify(util.getUploadedFile(exclusiveKey));
+    util.getUploadedFile(exclusiveKey)
+        .then(function (message) {
+            console.log('message is here:');
+            console.log(message);
+            res.send(message);
+        });
+
 });
 
 //URL is :node-express-env.prpmrstyrj.us-west-2.elasticbeanstalk.com
