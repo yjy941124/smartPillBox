@@ -42,16 +42,19 @@ app.get('/uploadPrivateKey', function (req, res) {
     res.send(privateKey);
 });
 var port = process.env.PORT || 3000;
-app.listen(port, function () {
-    console.log(port);
-});
+
 app.get('/getUploadedFile/:exclusiveKey', function (req, res) {
     var exclusiveKey = req.params.exclusiveKey;
     util.getUploadedFile(exclusiveKey)
         .then(function (message) {
+            console.log('returning message.')
             res.send(message);
         })
 });
 
+
+app.listen(port, function () {
+    console.log(port);
+});
 //URL is :node-express-env.prpmrstyrj.us-west-2.elasticbeanstalk.com
 //URL is :node-express-env.prpmrstyrj.us-west-2.elasticbeanstalk.com/
