@@ -10,8 +10,16 @@ var publicKey;
 var privateKey;
 var exclude;
 //var testEn = '';
+$(document).ready(function () {
+    privateKey = sessionStorage.getItem('privateKey');
+    historyStr = sessionStorage.getItem('uploadedFile');
+    getUploadFile();
+    viewHistory();
 
-window.onload = getUploadFile();
+});
+getUploadFile();
+viewHistory();
+/*
 function getUploadFile() {
     $.ajax({
         type: 'GET',
@@ -22,7 +30,7 @@ function getUploadFile() {
             console.log(data);
             historyStr = data.message;
             exclude = data.exclusive;
-            $.ajax({
+            /!*$.ajax({
                 type: 'GET',
                 url: '/uploadPrivateKey',
                 //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
@@ -37,8 +45,10 @@ function getUploadFile() {
                 },
                 contentType: "application/json",
                 dataType: 'text'
-            });
-
+            });*!/
+            console.log('success get uploaded file.');
+            console.log(privateKey);
+            viewHistory();
         }, error: function (data) {
             console.log(data);
         },
@@ -48,6 +58,7 @@ function getUploadFile() {
 
 
 }
+*/
 
 function viewHistory() {
 

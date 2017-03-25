@@ -7,6 +7,38 @@ var privateKey;
 var exclusiveKey = '';
 var uploadedFile;
 var appname;
+$(document).ready(function () {
+    renderUploadQRCode();
+    sessionStorage.setItem('privateKey',privateKey);
+    getUploadedFile();
+});
+function getUploadedFile() {
+    console.log('test called');
+    $.ajax({
+        type: 'GET',
+        url: '/getUploadedFile/'+exclusiveKey,
+        //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
+        success: function(data) {
+
+            uploadedFile = data;
+
+            console.log('Incoming uploadedFile....');
+
+            if (uploadedFile != "") {
+                sessionStorage.setItem('uploadedFile', uploadedFile);
+                window.location.href = '/pillbox';
+            }
+
+
+        }, error: function (err) {
+            console.log(err);
+        },
+        contentType: "application/json",
+        dataType: 'text'
+    });
+    setTimeout(getUploadedFile, 5000);
+}
+
 function makeid() {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -37,6 +69,34 @@ function select(selectedObject) {
     $("#QRModal").modal('show');
 }
 
+function renderUploadQRCode() {
+    var pairQrcode = new QRCode("Qrcode-fileupload");
+    var pairURL = 'abc';
+    var crypt = new JSEncrypt({ default_key_size: 1024 });
+    crypt.getKey();
+    privateKey = crypt.getPrivateKeyB64();
+    publicKey = crypt.getPublicKeyB64();
+    var rands = makeid();
+    var timestamp3 = new Date().getTime();
+    exclusiveKey = rands + timestamp3.toString();
+    pairQrcode.makeCode(publicKey+exclusiveKey);
+    console.log(privateKey);
+    $.ajax({
+        type: 'POST',
+        url: '/uploadPrivateKey',
+        data: JSON.stringify({"value" : privateKey}), // or JSON.stringify ({name: 'jonas'}),
+        success: function(data) {
+
+            console.log('here');
+            console.log(data);
+
+        }, error: function (data) {
+            console.log(data);
+        },
+        contentType: "application/json",
+        dataType: 'json'
+    });
+}
 function upload() {
     var pairQrcode = new QRCode("Qrcode");
     var pairURL = 'abc';

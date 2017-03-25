@@ -14,6 +14,23 @@ var ObjectId = require('mongodb').ObjectID;
 exports.saveUploadFile = function (file) {
     MongoClient.connect(mongodbUrl, function (err, db) {
         var files = db.collection('Files');
-        files.insertOne(file).then();
+        files.insertOne(
+            {
+                'message': file.message,
+                'exclusive' : file.exclusive
+            }
+        ).then(function () {
+            console.log('upload success');
+            db.close();
+        });
+    })
+};
+exports.getUploadedFile = function (exclusiveKey) {
+    return MongoClient.connect(mongodbUrl, function (err, db) {
+        var files = db.collection('Files');
+        files.findOne({'exclusive' : exclusiveKey})
+            .then(function (file) {
+                return file.message;
+            })
     })
 }
