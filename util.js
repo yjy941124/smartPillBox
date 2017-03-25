@@ -28,7 +28,8 @@ exports.getUploadedFile = function (exclusiveKey) {
         var files = db.collection('Files');
         return files.findOne({'exclusive' : exclusiveKey})
             .then(function (file) {
-                return file.message;
+                var uploadedFile =  file.message;
+                return uploadedFile;
             })
     })
-}
+};
