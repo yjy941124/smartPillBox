@@ -13,12 +13,12 @@ var exclude;
 $(document).ready(function () {
     privateKey = sessionStorage.getItem('privateKey');
     historyStr = sessionStorage.getItem('uploadedFile');
-    getUploadFile();
+
     viewHistory();
 
 });
-getUploadFile();
-viewHistory();
+
+
 /*
 function getUploadFile() {
     $.ajax({
