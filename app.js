@@ -47,7 +47,7 @@ app.get('/getUploadedFile/:exclusiveKey', function (req, res) {
     var exclusiveKey = req.params.exclusiveKey;
     util.getUploadedFile(exclusiveKey)
         .then(function (message) {
-            console.log('returning message.')
+            console.log('returning message.');
             res.send(message);
         })
 });

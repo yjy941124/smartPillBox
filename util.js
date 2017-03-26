@@ -33,7 +33,7 @@ exports.getUploadedFile = function (exclusiveKey) {
             }
             if (result) {
                 console.log('I have a result');
-                console.log(result);
+                console.log(result.message);
                 return result.message;
             }
         })
