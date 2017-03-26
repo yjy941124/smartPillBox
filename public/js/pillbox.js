@@ -10,51 +10,31 @@ var publicKey;
 var privateKey;
 var exclude;
 //var testEn = '';
-window.onload = viewHistory();
+window.onload = getUploadFile();
 
-/*
- function getUploadFile() {
- $.ajax({
- type: 'GET',
- url: '/uploadFile',
- //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
- success: function(data) {
- console.log('hereGet');
- console.log(data);
- historyStr = data.message;
- exclude = data.exclusive;
- /!*$.ajax({
- type: 'GET',
- url: '/uploadPrivateKey',
- //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
- success: function(data) {
+function getUploadFile() {
+    $.ajax({
+        type: 'GET',
+        url: '/uploadPrivateKey',
+        //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
+        success: function (data) {
 
- privateKey = data;
- console.log(privateKey);
- viewHistory();
+            privateKey = data;
+            console.log(privateKey);
+            viewHistory();
 
- }, error: function (data) {
- console.log(data);
- },
- contentType: "application/json",
- dataType: 'text'
- });*!/
- console.log('success get uploaded file.');
- console.log(privateKey);
- viewHistory();
- }, error: function (data) {
- console.log(data);
- },
- contentType: "application/json",
- dataType: 'json'
- });
+        }, error: function (data) {
+            console.log(data);
+        },
+        contentType: "application/json",
+        dataType: 'text'
+    });
 
 
- }
- */
+}
 
 function viewHistory() {
-    privateKey = sessionStorage.getItem('privateKey');
+    //privateKey = sessionStorage.getItem('privateKey');
     historyStr = sessionStorage.getItem('uploadedFile');
     var queryhistory = historyStr;
     var parsedResults = [];
