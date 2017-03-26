@@ -24,18 +24,12 @@ exports.saveUploadFile = function (file) {
     })
 };
 exports.getUploadedFile = function (exclusiveKey) {
-    return MongoClient.connect(mongodbUrl, function (err, db) {
-        console.log("111");
+    return MongoClient.connect(mongodbUrl).then(function (db) {
         var files = db.collection('Files');
-        files.findOne({'exclusive' : exclusiveKey}, function (err, result) {
-            if (err) {
-                console.log(err);
-            }
-            if (result) {
-                console.log('I have a result');
-                console.log(result.message);
-                return result.message;
-            }
-        })
+        console.log('111');
+        return files.findOne({'exclusive': exclusiveKey})
+    }).then(function (item) {
+        console.log('222');
+        return item.message;
     })
 };
