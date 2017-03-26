@@ -10,61 +10,55 @@ var publicKey;
 var privateKey;
 var exclude;
 //var testEn = '';
-$(document).ready(function () {
-    privateKey = sessionStorage.getItem('privateKey');
-    historyStr = sessionStorage.getItem('uploadedFile');
+window.onload = viewHistory();
 
-    viewHistory();
-
-});
-
-viewHistory();
 /*
-function getUploadFile() {
-    $.ajax({
-        type: 'GET',
-        url: '/uploadFile',
-        //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
-        success: function(data) {
-            console.log('hereGet');
-            console.log(data);
-            historyStr = data.message;
-            exclude = data.exclusive;
-            /!*$.ajax({
-                type: 'GET',
-                url: '/uploadPrivateKey',
-                //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
-                success: function(data) {
+ function getUploadFile() {
+ $.ajax({
+ type: 'GET',
+ url: '/uploadFile',
+ //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
+ success: function(data) {
+ console.log('hereGet');
+ console.log(data);
+ historyStr = data.message;
+ exclude = data.exclusive;
+ /!*$.ajax({
+ type: 'GET',
+ url: '/uploadPrivateKey',
+ //data: JSON.stringify(number), // or JSON.stringify ({name: 'jonas'}),
+ success: function(data) {
 
-                    privateKey = data;
-                    console.log(privateKey);
-                    viewHistory();
+ privateKey = data;
+ console.log(privateKey);
+ viewHistory();
 
-                }, error: function (data) {
-                    console.log(data);
-                },
-                contentType: "application/json",
-                dataType: 'text'
-            });*!/
-            console.log('success get uploaded file.');
-            console.log(privateKey);
-            viewHistory();
-        }, error: function (data) {
-            console.log(data);
-        },
-        contentType: "application/json",
-        dataType: 'json'
-    });
+ }, error: function (data) {
+ console.log(data);
+ },
+ contentType: "application/json",
+ dataType: 'text'
+ });*!/
+ console.log('success get uploaded file.');
+ console.log(privateKey);
+ viewHistory();
+ }, error: function (data) {
+ console.log(data);
+ },
+ contentType: "application/json",
+ dataType: 'json'
+ });
 
 
-}
-*/
+ }
+ */
 
 function viewHistory() {
-
+    privateKey = sessionStorage.getItem('privateKey');
+    historyStr = sessionStorage.getItem('uploadedFile');
     var queryhistory = historyStr;
     var parsedResults = [];
-    var crypt = new JSEncrypt({ default_key_size: 1024 });
+    var crypt = new JSEncrypt({default_key_size: 1024});
     crypt.setPrivateKey(privateKey);
     var parsed = parseHistoryString(historyStr);
     parsedResults = parsedResults.concat(parsed);
@@ -270,12 +264,12 @@ function combineMsg(itemList) {
 }
 
 
-function parseHistoryString(result){
+function parseHistoryString(result) {
     //historyRecord = result.get('history');
 
     var encrypted_data = historyStr;
     console.log("raw_data : ", encrypted_data);
-    var crypt = new JSEncrypt({ default_key_size: 1024 });
+    var crypt = new JSEncrypt({default_key_size: 1024});
     crypt.setPrivateKey(privateKey);
 
     var historyRecord = '';
@@ -295,26 +289,29 @@ function parseHistoryString(result){
     console.log("decrypt_data : ", historyRecord);
     var historyRecordArray = historyRecord.split(';');
     //console.log(historyRecord, historyRecordArray[1]);
-    var formattedHistory=historyRecordArray
-        .slice(1,-1)
-        .map( function(str){
+    var formattedHistory = historyRecordArray
+        .slice(1, -1)
+        .map(function (str) {
             // remove tail #
-            if(str.charAt(str.length-1)=='#')str=str.substr(0,str.length-1);
+            if (str.charAt(str.length - 1) == '#') str = str.substr(0, str.length - 1);
             // check format
-            if(!/^\d{1,2},\d{4},\d{10}$/.test(str)){console.warn('Unable to parse line:', str);return false;}
-            var arr=str.split(',');
+            if (!/^\d{1,2},\d{4},\d{10}$/.test(str)) {
+                console.warn('Unable to parse line:', str);
+                return false;
+            }
+            var arr = str.split(',');
             //console.log('parsing line:',arr);
-            var conditionByDigit=arr[1].split('');
+            var conditionByDigit = arr[1].split('');
             var status = parseInt(conditionByDigit[3]);
             var msg = status;
             var pill_n = parseInt(conditionByDigit[2]);
             var container_n = parseInt(conditionByDigit[1]);
             var pill_cont_s = '';
             if (container_n == 1) {
-                if (pill_n == 0){
+                if (pill_n == 0) {
                     pill_cont_s = 'no pill';
                 }
-                else{
+                else {
                     pill_cont_s = 'pill present';
                 }
             }
@@ -323,38 +320,46 @@ function parseHistoryString(result){
             }
             var cap_s = parseInt(conditionByDigit[0]);
             //var cap_s = '';
-            if (cap_s == 1 && msg == 0) { msg = 0;}
-            if (cap_s == 0 && msg == 0) { msg = 4;}
-            if (cap_s == 1 && msg == 1) { msg = 0;}
-            var messageLookup=['Cap closed',
+            if (cap_s == 1 && msg == 0) {
+                msg = 0;
+            }
+            if (cap_s == 0 && msg == 0) {
+                msg = 4;
+            }
+            if (cap_s == 1 && msg == 1) {
+                msg = 0;
+            }
+            var messageLookup = ['Cap closed',
                 'Wrong container opened',
                 'Pills remained in container',
                 'Missed schedule (container not opened during intake window)',
                 'Cap Open'
             ];
             return {
-                cell: 				parseInt(arr[0]),
-                timestamp: 			new Date(parseInt(arr[2])*1000),
-                isCapClosed: 		conditionByDigit[0] == '1',
-                isContainerInside:	conditionByDigit[1] == '1',
-                hasPillsInside:     conditionByDigit[2] == '1',
-                errorCode:          parseInt(conditionByDigit[3]),
-                extendMsg:          pill_cont_s,
-                originalText:       str,
-                flag:               0
+                cell: parseInt(arr[0]),
+                timestamp: new Date(parseInt(arr[2]) * 1000),
+                isCapClosed: conditionByDigit[0] == '1',
+                isContainerInside: conditionByDigit[1] == '1',
+                hasPillsInside: conditionByDigit[2] == '1',
+                errorCode: parseInt(conditionByDigit[3]),
+                extendMsg: pill_cont_s,
+                originalText: str,
+                flag: 0
             };
-        }).filter(function(s){return s!==false});
+        }).filter(function (s) {
+            return s !== false
+        });
     //console.info('History string parsed successfully:', formattedHistory);
     return formattedHistory;
 }
 
-function renderCalendar(parsedResults){
+function renderCalendar(parsedResults) {
     console.log(parsedResults);
     // 1. Calc start and end date
-    var allTimes=parsedResults.map(function(item){
+    var allTimes = parsedResults.map(function (item) {
         return item.timestamp;
     });
-    var minTime=new Date(Math.min.apply(Math, allTimes)), maxTime=new Date(Math.max.apply(Math, allTimes));
+    var minTime = new Date(Math.min.apply(Math, allTimes)), maxTime = new Date(Math.max.apply(Math, allTimes));
     console.info('Timestamp range:', minTime, maxTime);
 
     var startTime = new Date(minTime.getFullYear(), minTime.getMonth(), minTime.getDate()).getTime();
@@ -362,62 +367,63 @@ function renderCalendar(parsedResults){
     console.info('Day range:', new Date(startTime), new Date(endTime));
 
     // 2. Fill array for red/yellow days
-    var calendarData={};
-    var oneDay=86400*1000;
-    for(var timePointer=startTime;timePointer<=endTime;timePointer+=oneDay){
-        calendarData[timePointer]={
-            ok:   		true,
-            messages: 	'',
-            title: 		'OK' // Show OK by default.
+    var calendarData = {};
+    var oneDay = 86400 * 1000;
+    for (var timePointer = startTime; timePointer <= endTime; timePointer += oneDay) {
+        calendarData[timePointer] = {
+            ok: true,
+            messages: '',
+            title: 'OK' // Show OK by default.
         };
     }
 
-    parsedResults.map(function(item){
+    parsedResults.map(function (item) {
         // calc day
-        var timePointer=item.timestamp;
-        timePointer-=(timePointer-startTime)%oneDay;
+        var timePointer = item.timestamp;
+        timePointer -= (timePointer - startTime) % oneDay;
         //smoke test
         calendarData[timePointer].ok;
 
-        var message=tm(item.timestamp)+' | Box:'+ item.cell+'<br>'+item.msg;
+        var message = tm(item.timestamp) + ' | Box:' + item.cell + '<br>' + item.msg;
         // update OK status
-        if(!item.ok){
-            calendarData[timePointer].ok=false;
-            calendarData[timePointer].title='Error';
-            message='<span class="red">'+message+'</span>';
-        }else{
-            message='<span class="green">'+message+'</span>';
+        if (!item.ok) {
+            calendarData[timePointer].ok = false;
+            calendarData[timePointer].title = 'Error';
+            message = '<span class="red">' + message + '</span>';
+        } else {
+            message = '<span class="green">' + message + '</span>';
         }
         // modify item message
-        calendarData[timePointer].messages+=message+'<br><br>';
+        calendarData[timePointer].messages += message + '<br><br>';
     });
-    console.log('Calendar Data Ready:',calendarData);
+    console.log('Calendar Data Ready:', calendarData);
 
     // 3. Tooltip text ready for dates -- use messages
-    var makePopover=function(title, message){
+    var makePopover = function (title, message) {
         return {
-            content: 	message,
-            title: 		title,
-            html: 		true,
-            placement: 	"auto top",
-            trigger: 	"click"
+            content: message,
+            title: title,
+            html: true,
+            placement: "auto top",
+            trigger: "click"
         };
     }
     // 4. Apply Calendar Render function.
     // Red: has error, Yellow: no data reported
     $('#historyDiv').html('').calendar({
-        customDayRenderer: function(element, date) {
-            var timePointer=+date;
-            if(timePointer>=+startTime && timePointer<=+endTime ){
-                var item=calendarData[timePointer];
-                if(timePointer==+startTime)
+        customDayRenderer: function (element, date) {
+            var timePointer = +date;
+            if (timePointer >= +startTime && timePointer <= +endTime) {
+                var item = calendarData[timePointer];
+                if (timePointer == +startTime)
                     $(element).css('border', '2px solid blue');
-                if(timePointer==+endTime){
+                if (timePointer == +endTime) {
                     $(element).css('text-decoration', 'underline');
                     $(element).css('border', '2px solid blue');
                 }
+                console.log(item);
                 // Case 1: data present, status OK
-                if(item.ok && item.messages!=''){
+                if (item.ok && item.messages != '') {
                     $(element).css('font-weight', 'bold');
                     $(element).css('font-size', '12px');
                     $(element).css('color', 'green');
@@ -425,7 +431,7 @@ function renderCalendar(parsedResults){
                     return;
                 }
                 // Case 2: missing data
-                if(item.ok){
+                if (item.ok) {
                     $(element).css('background-color', 'yellow');
                     $(element).css('color', 'white');
                     $(element).css('border-radius', '12px');
@@ -458,11 +464,11 @@ function renderCalendar(parsedResults){
 //viewHistory();//debug only
 
 function tm(dt) {
-    return (dt.getMonth()+1) + '/' + dt.getDate() + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds();
+    return (dt.getMonth() + 1) + '/' + dt.getDate() + '/' + dt.getFullYear() + ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds();
 }
 
 
-function historyTip(){
+function historyTip() {
     $("#scheduleTipModal").modal('show');
 }
 
@@ -477,9 +483,9 @@ function makeid() {
 }
 
 
-function pair(){
+function pair() {
     //var pairURL = 'https://smart-pillbox.parseapp.com/history';
-    var crypt = new JSEncrypt({ default_key_size: 1024 });
+    var crypt = new JSEncrypt({default_key_size: 1024});
     crypt.getKey();
     privateKey = crypt.getPrivateKeyB64();
     publicKey = crypt.getPublicKeyB64();
@@ -502,7 +508,7 @@ function pair(){
     //console.log("decrypt", testDe);
 
 
-    pairQrcode.makeCode(username+publicKey+exclusiveKey);
+    pairQrcode.makeCode(username + publicKey + exclusiveKey);
     $("#pairModal").modal('show');
 }
 
