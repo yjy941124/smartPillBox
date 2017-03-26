@@ -45,15 +45,15 @@ var port = process.env.PORT || 3000;
 
 app.get('/getUploadedFile/:exclusiveKey', function (req, res) {
     var exclusiveKey = req.params.exclusiveKey;
-    var uploadedFile = JSON.stringify(util.getUploadedFile(exclusiveKey));
+    //var uploadedFile = JSON.stringify(util.getUploadedFile(exclusiveKey));
     //console.log(uploadedFile);
-    /*util.getUploadedFile(exclusiveKey)
+    util.getUploadedFile(exclusiveKey)
         .then(function (file) {
             console.log('returning files.');
             console.log(file);
             res.send(file.message);
-        })*/
-    res.send(uploadedFile);
+        });
+    //res.send(uploadedFile);
 
 
 });

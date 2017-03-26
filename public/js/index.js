@@ -13,7 +13,6 @@ $(document).ready(function () {
     getUploadedFile();
 });
 function getUploadedFile() {
-    console.log('test called');
     $.ajax({
         type: 'GET',
         url: '/getUploadedFile/'+exclusiveKey,
@@ -23,7 +22,7 @@ function getUploadedFile() {
             uploadedFile = data;
 
             console.log('Incoming uploadedFile....');
-
+            console.log(uploadedFile);
             if (uploadedFile != "") {
                 sessionStorage.setItem('uploadedFile', uploadedFile);
                 window.location.href = '/pillbox';
