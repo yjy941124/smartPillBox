@@ -51,7 +51,7 @@ app.get('/getUploadedFile/:exclusiveKey', function (req, res) {
         .then(function (file) {
             console.log('returning files.');
             console.log(file);
-            res.send(file.message);
+            res.send(file);
         });
     //res.send(uploadedFile);
 
