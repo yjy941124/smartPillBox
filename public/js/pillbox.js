@@ -29,8 +29,6 @@ function getUploadFile() {
         contentType: "application/json",
         dataType: 'text'
     });
-
-
 }
 
 function viewHistory() {

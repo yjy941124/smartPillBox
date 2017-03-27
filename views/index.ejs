@@ -7,6 +7,8 @@
     .listblock ul li a:hover {
         background: transparent url('../img/basket.png') no-repeat 3px 170px;
     }
+    li div { text-align:left; }
+    li div span { float:left; }
 </style>
 <body>
 
@@ -36,13 +38,17 @@
       <div class="starter-template">
         <h1>Welcome to ICSL's SafeUpLoad</h1>
           <div>
+              <div>
+                  <div class="col-sm-6" id="Qrcode-fileupload"></div>
+                  <a class="btn btn-primary btn-lg" onclick="refreshQRCode()">Click to refresh the QR Code.</a>
+              </div>
 
-              <div class="col-sm-6" id="Qrcode-fileupload"></div>
+
               <p>or open an app</p>
               <ul>
-                  <li  id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</li>
-                  <li  onclick="redirect('bloodtest')" role="button">Blood test</li>
-                  <li  onclick="redirect('appc')" role="button">App C</li>
+                  <li><a class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a></li>
+                  <li><a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a></li>
+                  <li><a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a></li>
               </ul>
 
           </div>

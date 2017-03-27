@@ -67,7 +67,15 @@ function select(selectedObject) {
     console.log(timestamp3.toString());*/
     $("#QRModal").modal('show');
 }
+function refreshQRCode() {
+    console.log('previous');
+    console.log(privateKey);
+    $("#Qrcode-fileupload").html('');
+    renderUploadQRCode();
+    console.log('after');
+    console.log(privateKey);
 
+}
 function renderUploadQRCode() {
     var pairQrcode = new QRCode("Qrcode-fileupload");
     var pairURL = 'abc';
@@ -85,10 +93,6 @@ function renderUploadQRCode() {
         url: '/uploadPrivateKey',
         data: JSON.stringify({"value" : privateKey}), // or JSON.stringify ({name: 'jonas'}),
         success: function(data) {
-
-            console.log('here');
-            console.log(data);
-
         }, error: function (data) {
             console.log(data);
         },
