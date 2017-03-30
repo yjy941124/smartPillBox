@@ -32,26 +32,67 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
+    <div class="starter-template">
+    <div class="table-title">
+        <h3> Welcome to ICSL's SafeUpLoad </h3>
+    </div>
     <div class="container">
+        <table class="table-fill">
+            <thead class="layout_head">
+            <tr>
+                <th class="text-center">Scan QR Code to Upload File</th>
+                <th class="text-center">Open an App  for more features</th>
+            </tr>
+            </thead>
+            <tbody class="table-hover">
+            <tr>
+                <td rowspan="3" class="text-center" style="text-align:center">
+                    <a style="display:inline-block; align: center;vertical-align: middle;" id="Qrcode-fileupload"></a>
+                </td>
 
-      <div class="starter-template">
-        <h1>Welcome to ICSL's SafeUpLoad</h1>
-          <div>
-              <div>
-                  <div class="col-sm-6" id="Qrcode-fileupload"></div>
-                  <a class="btn btn-primary btn-lg" onclick="refreshQRCode()">Click to refresh the QR Code.</a>
-              </div>
+                <td class="text-center">
+                    <a style="display:inline-block; min-width:5cm;"class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <a style="display:inline-block; min-width:5cm;" class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a>
+                </td>
 
 
-              <p>or open an app</p>
-              <ul>
-                  <li><a class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a></li>
-                  <li><a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a></li>
-                  <li><a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a></li>
-              </ul>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <a  style="display:inline-block; min-width:5cm;" class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a>
+                </td>
 
-          </div>
+            </tr>
+            <tr>
+                <td class="text-center">
+                    <a class="btn btn-primary btn-lg" onclick="refreshQRCode()">Click to refresh the QR Code.</a>
+                </td>
+                <td class="text-center">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <!--<h1>Welcome to ICSL's SafeUpLoad</h1>-->
+          <!--<div>-->
+              <!--<div>-->
+                  <!--<div class="col-sm-6" id="Qrcode-fileupload"></div>-->
+                  <!--<a class="btn btn-primary btn-lg" onclick="refreshQRCode()">Click to refresh the QR Code.</a>-->
+              <!--</div>-->
+
+
+              <!--<p>or open an app</p>-->
+              <!--<ul>-->
+                  <!--<li><a class="btn btn-primary btn-lg" id="pillbox" onclick="redirect('pillbox')" role="button">Pillbox</a></li>-->
+                  <!--<li><a class="btn btn-primary btn-lg" onclick="redirect('bloodtest')" role="button">Blood test</a></li>-->
+                  <!--<li><a class="btn btn-primary btn-lg" onclick="redirect('appc')" role="button">App C</a></li>-->
+              <!--</ul>-->
 
         <!--<h1>Please
 

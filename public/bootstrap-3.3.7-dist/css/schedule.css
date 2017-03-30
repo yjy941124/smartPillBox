@@ -93,10 +93,10 @@ div.table-title {
   border-bottom:none;
 }
  
-.table-fill tr:nth-child(odd) td {
-  background:#EBEBEB;
-}
- 
+/*.table-fill tr:nth-child(odd) td {*/
+  /*background:#EBEBEB;*/
+/*}*/
+ /**/
 /*tr:nth-child(odd):hover td {
   background:#4E5066;
 }*/
@@ -110,7 +110,7 @@ div.table-title {
 }
  
 .table-fill td {
-  background:#FFFFFF;
+  background:#EBEBEB;
   padding:20px;
   text-align:left;
   vertical-align:middle;
