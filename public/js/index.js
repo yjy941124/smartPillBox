@@ -35,7 +35,7 @@ function getUploadedFile() {
         contentType: "application/json",
         dataType: 'text'
     });
-    setTimeout(getUploadedFile, 5000);
+    setTimeout(getUploadedFile, 1000);
 }
 
 function makeid() {
